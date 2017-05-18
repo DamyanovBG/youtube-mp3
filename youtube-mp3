@@ -1,0 +1,33 @@
+BOLD=$(tput bold)
+DAMYANOVBG='\033[0;32m[DamyanovBG]'
+NC=$(tput sgr0) # No Color
+
+if [ -z $1 ]; then
+tput bold
+echo -e "${DAMYANOVBG}$(tput bold) Syntax: damyanovbg-music [URL] [DIR]"
+echo -e "${BOLD}${DAMYANOVBG}$(tput bold) =3"
+else
+
+echo -e "${BOLD}${DAMYANOVBG}$(tput bold) Downloading your song. Please wait...${NC}"
+tput sgr0
+youtube-dl -x --audio-format mp3 $1
+
+echo -e "${BOLD}${DAMYANOVBG}$(tput bold) Your song was downloaded successfuly.${NC}"
+echo -e "${BOLD}${DAMYANOVBG}$(tput bold) Where to store your song:${NC}"
+
+if [ -z $2 ]; then
+
+echo -e "${BOLD}${DAMYANOVBG}$(tput bold) The song was put in the current directory "
+tput sgr0
+pwd
+printf "\n"
+
+else
+
+echo -e "${BOLD}${DAMYANOVBG}$(tput bold) Moving song to choosen directory...${NC}"
+mv *.mp3 $2
+echo -e "${BOLD}${DAMYANOVBG}$(tput bold) The song was moved successfuly to $2${NC}"
+tput sgr0
+fi
+
+fi
